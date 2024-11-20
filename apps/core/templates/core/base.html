@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Hello Bulma!</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"/>
+    </head>
+
+    <body>
+        <nav class="navbar" role="navigation" aria-label="main-navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">MySass</a>
+            </div>
+
+            <div class="navbar-menu">
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+                          {% if request.user.is_authenticated %}
+                            <!--Atualizado logout-->
+                            <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="button is-danger">Logout</button>
+                            </form>
+                            <!-- <a href="{% url 'logout' %}" class="button is-danger">Logout</a> -->
+                          {% else %}
+                            <a href="{% url 'signup' %}" class="button is-primary"><strong>Sing up</strong></a>
+                            <a href="{% url 'login' %}" class="button is-light">Log in</a>
+                          {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <section class="section">
+          {% block content %}
+          {% endblock %}
+        </section>
+
+        <footer class="footer">
+            <div class="content has-text-contered">
+                <p> <strong> MySass </strong>. All rights reserved.</p>
+            </div>
+        </footer>
+    </body>
+</html>
